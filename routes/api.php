@@ -18,6 +18,6 @@ Route::prefix('v1')->group(function () {
 });
 
 Route::prefix('v2')->group(function () {
-    Route::get('/xmlToJson',[App\Http\Controllers\Api\v1\ParserController::class,'parseXml2'])->name('api.parsexml');
+    Route::get('/xmlToJson',[App\Http\Controllers\Api\v2\ParserController::class,'parseXml'])->name('api.parsexml');
 });
 
