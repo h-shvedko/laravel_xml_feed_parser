@@ -104,6 +104,13 @@ class XmlStateDto
         return $this;
     }
 
+    public function setXml(string $xml): XmlStateDto
+    {
+        $this->xml = $xml;
+        
+        return $this;
+    }
+
     public function getBuffer(): string
     {
         return $this->buffer;
