@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jobs>
+  <job>
+    <referenceId>109147</referenceId>
+    <cpc>0.39</cpc>
+  </job>
+  <job>
+    <referenceId>2859</referenceId>
+    <cpc>0.239</cpc>
+  </job>
+  <job>
+    <referenceId>21859</referenceId>
+    <cpc>0.139</cpc>
+  </job>
+  <job>
+    <referenceId>22859</referenceId>
+    <cpc>0.339</cpc>
+  </job>
+</jobs>
