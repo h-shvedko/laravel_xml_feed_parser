@@ -38,7 +38,7 @@ class XmlStateDto
         return $this->byte;
     }
 
-    public function getInitialParentTag(): ?string
+    public function getInitialParentTag(): ?array
     {
         if(array_key_exists($this->level,$this->initialParentTag)){
             return $this->initialParentTag[$this->level];
@@ -87,9 +87,12 @@ class XmlStateDto
         return $this;
     }
 
-    public function setInitialParentTag(string $initialParentTag): XmlStateDto
+    public function setInitialParentTag(array $initialParentTagWithValue): XmlStateDto
     {
-        $this->initialParentTag[$this->level] = $initialParentTag;
+        $this->initialParentTag[$this->level] = [
+            'name' => $initialParentTagWithValue['name'],
+            'xml' => $initialParentTagWithValue['xml']
+        ];
         return $this;
     }
 
@@ -107,7 +110,7 @@ class XmlStateDto
     public function setXml(string $xml): XmlStateDto
     {
         $this->xml = $xml;
-        
+
         return $this;
     }
 

@@ -9,7 +9,7 @@ use XMLReader;
  * ParserServiceNew
  */
 class ParserServiceNew extends XMLReader
-{    
+{
     /**
      * Constructor
      *
@@ -19,7 +19,7 @@ class ParserServiceNew extends XMLReader
     public function __construct(private XmlStateDto $xmlStateDto)
     {
     }
-    
+
     /**
      * Convert XML to JSON
      *
@@ -34,7 +34,7 @@ class ParserServiceNew extends XMLReader
 
         return $this->parseToJson($content);
     }
-    
+
     /**
      * Parse XML to JSON
      *
@@ -49,10 +49,10 @@ class ParserServiceNew extends XMLReader
         $json = json_encode($xml);
 
         return [
-            $this->xmlStateDto->getInitialParentTag() => json_decode($json, true),
+            $this->xmlStateDto->getInitialParentTag()['name'] => json_decode($json, true),
         ];
     }
-    
+
     /**
      * readString
      *
@@ -61,21 +61,17 @@ class ParserServiceNew extends XMLReader
     public function readString(): string
     {
         $depth = 1;
-
         while ($this->read() && $depth != 0) {
-
             if ($this->nodeType == XMLReader::ELEMENT) {
-
-                if ($this->xmlStateDto->getInitialParentTag() == $this->name) {
-                    $this->xmlStateDto->setXml($this->readOuterXml());
-
-                    return $this->xmlStateDto->getXml();
+                $initialParent = $this->xmlStateDto->getInitialParentTag();
+                if (isset($initialParent['name']) && $initialParent['name'] == $this->name) {
+                    return $initialParent['xml'];
                 }
-
-                $this->xmlStateDto->setInitialParentTag($this->name);
-
+                $this->xmlStateDto->setInitialParentTag([
+                    'name' => $this->name,
+                    'xml' => $depth != 1 ? $this->readOuterXml(): ''
+                ]);
                 $depth++;
-
                 $this->xmlStateDto->setLevel($depth);
             }
 
